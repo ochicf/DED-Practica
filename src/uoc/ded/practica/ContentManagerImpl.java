@@ -5,8 +5,8 @@ import java.util.Date;
 
 import uoc.ei.tads.Diccionari;
 import uoc.ei.tads.DiccionariAVLImpl;
-import uoc.ei.tads.DiccionariVectorImpl;
 import uoc.ei.tads.Iterador;
+import uoc.ei.tads.TaulaDispersio;
 
 public class ContentManagerImpl implements ContentManager {
 	
@@ -17,7 +17,7 @@ public class ContentManagerImpl implements ContentManager {
 	
 	public ContentManagerImpl() {
 		this.users = new DiccionariAVLImpl<String, User>(User.CMP_CLAU_VALOR);
-		this.movies = new DiccionariVectorImpl<String, Movie>(P);
+		this.movies = new TaulaDispersio<String, Movie>(P);
 		this.topMovies=new OrderedVector<Movie>(TOP_MOVIES, Movie.CMP);
 	}
 
