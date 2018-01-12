@@ -98,7 +98,6 @@ public class ContentManagerImpl implements ContentManager {
 		u.setWatchingMovie(pm.getMovie());	
 		u.resumeMovie(idMovie);
 	}
-
 	
 	@Override
 	public Iterador<WatchedMovie> getUserWatchedMovies(String idUser) throws DEDException {
@@ -110,6 +109,18 @@ public class ContentManagerImpl implements ContentManager {
 		return (watchedMovies.elements());
 	}
 
+	@Override
+	public WatchedMovie getWatchedMovie(String idUser, Date date) throws DEDException {
+		User u = this.getUser(idUser);
+		
+		ArbreAVL<WatchedMovie> watchedMovies = u.getWatchedMovies();
+		WatchedMovie stubMovie = new WatchedMovie(null, date);
+		WatchedMovie watchedMovie = watchedMovies.consultar(stubMovie);
+		if (watchedMovie == null) {
+			throw new DEDException(Messages.NO_WATCHED_MOVIES);
+		}
+		return watchedMovie;
+	}
 
 	@Override
 	public Iterador<Movie> topMovies() throws DEDException {
