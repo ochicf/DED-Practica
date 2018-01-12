@@ -3,6 +3,11 @@ package uoc.ded.practica;
 import java.util.Comparator;
 
 import uoc.ei.tads.ClauValor;
+import uoc.ei.tads.Iterador;
+import uoc.ei.tads.Llista;
+import uoc.ei.tads.LlistaEncadenada;
+import uoc.ei.tads.Posicio;
+import uoc.ei.tads.Recorregut;
 
 /**
  * Classe que modela un usuari
@@ -14,7 +19,7 @@ public class User {
 	private String name;
 	private String surname;
 	
-	private PausedMovie pausedMovie;
+	private Llista<PausedMovie> pausedMovies;
 	
 	private Movie watchingMovie;
 	private LlistaEncadenadaOrdenada<WatchedMovie> watchedMovies;
@@ -42,7 +47,7 @@ public class User {
 		this.name = name;
 		this.surname = surname;
 		this.watchingMovie=null;
-		this.pausedMovie=null;
+		this.pausedMovies = new LlistaEncadenada<PausedMovie>();
 		this.watchedMovies = new LlistaEncadenadaOrdenada<WatchedMovie>(WatchedMovie.CMP);
 	}
 
@@ -63,21 +68,39 @@ public class User {
 	}
 
 	public PausedMovie pauseMovie(int minute) throws DEDException {
-		PausedMovie pm = null;
 		Movie m = this.watchingMovie();
 		if (minute > m.getDuration()) throw new DEDException(Messages.MOVIE_DURATION_EXCEEDED);
-		else {		
-			pm = new PausedMovie(m, minute);
-			this.pausedMovie = pm;
-			this.watchingMovie = null;
+		
+		PausedMovie pausedMovie = new PausedMovie(m, minute);
+		this.pausedMovies.afegirAlFinal(pausedMovie);
+		this.watchingMovie = null;
+		return pausedMovie;
+	}
+
+	public PausedMovie pausedMovie(String idMovie) {
+		Posicio<PausedMovie> posicio = this.posicioPausedMovie(idMovie);
+		return posicio == null ? null : posicio.getElem();
+	}
+
+	/**
+	 * Looks for a movie in the user's paused movies and returns its position.
+	 * I've added this private method to apply DRY.
+	 * 
+	 * @param idMovie
+	 * @return position of the paused movie
+	 */
+	private Posicio<PausedMovie> posicioPausedMovie(String idMovie) {
+		Recorregut<PausedMovie> pausedMovies = this.pausedMovies.posicions();
+		while (pausedMovies.hiHaSeguent()) {
+			Posicio<PausedMovie> posicio = pausedMovies.seguent();
+			Movie movie = posicio.getElem().getMovie();
+			if (movie.getIdMovie().equals(idMovie)) {
+				return posicio;
+			}
 		}
-		return pm;
+		return null;
 	}
-
-	public PausedMovie pausedMovie() {
-		return this.pausedMovie;
-	}
-
+	
 	public void setWatchingMovie(Movie movie) {
 		this.watchingMovie=movie;
 	}
@@ -86,14 +109,23 @@ public class User {
 		StringBuffer sb = new StringBuffer("id: ").append(this.idUser).append(" ");
 		sb.append("name: ").append(this.name).append(" ");
 		sb.append("surname: ").append(this.surname).append(" ");
-		if (this.pausedMovie!=null) sb.append(Messages.LS+"paused movie: "+Messages.LS).append(this.pausedMovie.toString("\t")).append(Messages.LS);
+	
 		if (this.isWatchingMovie()) sb.append(Messages.LS+"watching movie: "+Messages.LS).append(this.watchingMovie.toString("\t")).append(Messages.LS);
+		if (!this.pausedMovies.estaBuit()){
+			sb.append(Messages.LS+"paused movies: "+Messages.LS);
+			for (Iterador<PausedMovie> it = this.pausedMovies.elements(); it.hiHaSeguent(); ) {
+				sb.append(it.seguent().toString(Messages.PREFIX)).append(Messages.LS);
+			}
+		}
 		
 		return sb.toString();
 	}
 
-	public void resumeMovie() {
-		this.pausedMovie=null;
+	public void resumeMovie(String idMovie) {
+		Posicio<PausedMovie> posicio = this.posicioPausedMovie(idMovie);
+		if (posicio != null) {
+			this.pausedMovies.esborrar(posicio);
+		}
 	}
 
 	public void endMovie() {
