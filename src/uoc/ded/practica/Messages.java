@@ -19,7 +19,7 @@ public interface Messages {
 	public static final String NO_PAUSED_MOVIE = "No paused movie";
 	public static final String NO_MOVIES = "There are no movies";
 	public static final String NO_USERS = "There are no users";
-	public static final String NO_WATCHED_MOVIES = "There are no whatches movies";
+	public static final String NO_WATCHED_MOVIES = "There are no watched movies";
 
 
 }
