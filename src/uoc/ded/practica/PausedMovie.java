@@ -20,7 +20,7 @@ public class PausedMovie {
 	}
 	
 	public String toString(String prefix) {
-		StringBuffer sb = new StringBuffer(prefix+"movie: ").append(this.m.getTitle()).append(", minute: ").append(this.minute);
+		StringBuffer sb = new StringBuffer(prefix+"movie: ").append(this.m.getIdMovie()+" - ").append(this.m.getTitle()).append(", minute: ").append(this.minute);
 		return sb.toString();
 	}
 
