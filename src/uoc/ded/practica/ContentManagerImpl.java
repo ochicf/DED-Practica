@@ -88,7 +88,7 @@ public class ContentManagerImpl implements ContentManager {
 	}
 
 	@Override
-	public void resumeMovie(String idUser) throws DEDException {
+	public void resumeMovie(String idUser, String idMovie) throws DEDException {
 		User u = this.getUser(idUser);
 		PausedMovie pm = u.pausedMovie();
 		if (pm==null) throw new DEDException(Messages.NO_PAUSED_MOVIE);
