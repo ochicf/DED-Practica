@@ -68,15 +68,13 @@ public class User {
 	}
 
 	public PausedMovie pauseMovie(int minute) throws DEDException {
-		PausedMovie pm = null;
 		Movie m = this.watchingMovie();
 		if (minute > m.getDuration()) throw new DEDException(Messages.MOVIE_DURATION_EXCEEDED);
-		else {		
-			pm = new PausedMovie(m, minute);
-			this.pausedMovie = pm;
-			this.watchingMovie = null;
-		}
-		return pm;
+		
+		PausedMovie pausedMovie = new PausedMovie(m, minute);
+		this.pausedMovies.afegirAlFinal(pausedMovie);
+		this.watchingMovie = null;
+		return pausedMovie;
 	}
 
 	public PausedMovie pausedMovie() {
