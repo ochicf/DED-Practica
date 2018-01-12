@@ -4,18 +4,19 @@ package uoc.ded.practica;
 import java.util.Date;
 
 import uoc.ei.tads.Diccionari;
+import uoc.ei.tads.DiccionariAVLImpl;
 import uoc.ei.tads.DiccionariVectorImpl;
 import uoc.ei.tads.Iterador;
 
 public class ContentManagerImpl implements ContentManager {
 	
-	DiccionariOrderedVector<String, User> users;
+	Diccionari<String, User> users;
 	Diccionari<String, Movie> movies;
 	
 	OrderedVector<Movie> topMovies;
 	
 	public ContentManagerImpl() {
-		this.users = new DiccionariOrderedVector<String, User> (U, User.CMP);
+		this.users = new DiccionariAVLImpl<String, User>(User.CMP_CLAU_VALOR);
 		this.movies = new DiccionariVectorImpl<String, Movie>(P);
 		this.topMovies=new OrderedVector<Movie>(TOP_MOVIES, Movie.CMP);
 	}

@@ -9,7 +9,6 @@ import uoc.ei.tads.Iterador;
  */
 public interface ContentManager {
 
-	public static final int U = 500;
 	public static final int P = 100;
 	public static final int TOP_MOVIES = 10;
 
