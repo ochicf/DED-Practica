@@ -83,6 +83,25 @@ public class User {
 		return this.pausedMovie;
 	}
 
+	/**
+	 * Looks for a movie in the user's paused movies and returns its position.
+	 * I've added this private method to apply DRY.
+	 * 
+	 * @param idMovie
+	 * @return position of the paused movie
+	 */
+	private Posicio<PausedMovie> posicioPausedMovie(String idMovie) {
+		Recorregut<PausedMovie> pausedMovies = this.pausedMovies.posicions();
+		while (pausedMovies.hiHaSeguent()) {
+			Posicio<PausedMovie> posicio = pausedMovies.seguent();
+			Movie movie = posicio.getElem().getMovie();
+			if (movie.getIdMovie().equals(idMovie)) {
+				return posicio;
+			}
+		}
+		return null;
+	}
+	
 	public void setWatchingMovie(Movie movie) {
 		this.watchingMovie=movie;
 	}
