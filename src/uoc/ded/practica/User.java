@@ -77,8 +77,9 @@ public class User {
 		return pausedMovie;
 	}
 
-	public PausedMovie pausedMovie() {
-		return this.pausedMovie;
+	public PausedMovie pausedMovie(String idMovie) {
+		Posicio<PausedMovie> posicio = this.posicioPausedMovie(idMovie);
+		return posicio == null ? null : posicio.getElem();
 	}
 
 	/**
