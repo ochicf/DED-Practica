@@ -14,7 +14,7 @@ public class WatchedMovie {
 
 		@Override
 		public int compare(WatchedMovie wm1, WatchedMovie wm2) {
-			return wm2.date.compareTo(wm1.date);
+			return wm2.date.compareTo(wm1.date) * -1;
 		}
 	};
 	
