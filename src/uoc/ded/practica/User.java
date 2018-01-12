@@ -109,8 +109,14 @@ public class User {
 		StringBuffer sb = new StringBuffer("id: ").append(this.idUser).append(" ");
 		sb.append("name: ").append(this.name).append(" ");
 		sb.append("surname: ").append(this.surname).append(" ");
-		if (this.pausedMovie!=null) sb.append(Messages.LS+"paused movie: "+Messages.LS).append(this.pausedMovie.toString("\t")).append(Messages.LS);
+	
 		if (this.isWatchingMovie()) sb.append(Messages.LS+"watching movie: "+Messages.LS).append(this.watchingMovie.toString("\t")).append(Messages.LS);
+		if (!this.pausedMovies.estaBuit()){
+			sb.append(Messages.LS+"paused movies: "+Messages.LS);
+			for (Iterador<PausedMovie> it = this.pausedMovies.elements(); it.hiHaSeguent(); ) {
+				sb.append(it.seguent().toString(Messages.PREFIX)).append(Messages.LS);
+			}
+		}
 		
 		return sb.toString();
 	}
