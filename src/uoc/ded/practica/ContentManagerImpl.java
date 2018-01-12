@@ -95,7 +95,7 @@ public class ContentManagerImpl implements ContentManager {
 		if (pm==null) throw new DEDException(Messages.NO_PAUSED_MOVIE);
 		
 		u.setWatchingMovie(pm.getMovie());	
-		u.resumeMovie();
+		u.resumeMovie(idMovie);
 	}
 
 	

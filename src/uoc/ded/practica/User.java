@@ -115,8 +115,11 @@ public class User {
 		return sb.toString();
 	}
 
-	public void resumeMovie() {
-		this.pausedMovie=null;
+	public void resumeMovie(String idMovie) {
+		Posicio<PausedMovie> posicio = this.posicioPausedMovie(idMovie);
+		if (posicio != null) {
+			this.pausedMovies.esborrar(posicio);
+		}
 	}
 
 	public void endMovie() {
