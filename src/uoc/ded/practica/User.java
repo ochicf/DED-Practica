@@ -118,6 +118,12 @@ public class User {
 				sb.append(it.seguent().toString(Messages.PREFIX)).append(Messages.LS);
 			}
 		}
+		if (!this.watchedMovies.estaBuit()) {
+			sb.append(Messages.LS+"watched movies: "+Messages.LS);
+			for (Iterador<WatchedMovie> it = this.watchedMovies.elements(); it.hiHaSeguent(); ) {
+				sb.append(Messages.PREFIX).append(it.seguent().toString()).append(Messages.LS);
+			}
+		}
 		
 		return sb.toString();
 	}
