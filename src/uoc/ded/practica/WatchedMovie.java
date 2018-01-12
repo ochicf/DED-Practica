@@ -1,5 +1,6 @@
 package uoc.ded.practica;
 
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -30,7 +31,8 @@ public class WatchedMovie {
 	}
 	
 	public String toString() {
-		StringBuffer sb = new StringBuffer(this.m.getIdMovie()+" ").append(m.getTitle()).append(" ").append(this.date);
+		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		StringBuffer sb = new StringBuffer(this.m.getIdMovie()+" ").append(m.getTitle()).append(" ").append(df.format(this.date));
 		
 		return sb.toString();
 	}
