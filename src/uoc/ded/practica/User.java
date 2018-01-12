@@ -3,6 +3,11 @@ package uoc.ded.practica;
 import java.util.Comparator;
 
 import uoc.ei.tads.ClauValor;
+import uoc.ei.tads.Iterador;
+import uoc.ei.tads.Llista;
+import uoc.ei.tads.LlistaEncadenada;
+import uoc.ei.tads.Posicio;
+import uoc.ei.tads.Recorregut;
 
 /**
  * Classe que modela un usuari
@@ -14,7 +19,7 @@ public class User {
 	private String name;
 	private String surname;
 	
-	private PausedMovie pausedMovie;
+	private Llista<PausedMovie> pausedMovies;
 	
 	private Movie watchingMovie;
 	private LlistaEncadenadaOrdenada<WatchedMovie> watchedMovies;
@@ -42,7 +47,7 @@ public class User {
 		this.name = name;
 		this.surname = surname;
 		this.watchingMovie=null;
-		this.pausedMovie=null;
+		this.pausedMovies = new LlistaEncadenada<PausedMovie>();
 		this.watchedMovies = new LlistaEncadenadaOrdenada<WatchedMovie>(WatchedMovie.CMP);
 	}
 
