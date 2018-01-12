@@ -2,6 +2,8 @@ package uoc.ded.practica;
 
 import java.util.Comparator;
 
+import uoc.ei.tads.ClauValor;
+
 /**
  * Classe que modela un usuari
  *
@@ -22,6 +24,15 @@ public class User {
 		@Override
 		public int compare(String idUser1, String idUser2) {
 			int ret = idUser1.compareTo(idUser2);
+			return ret;
+		}
+	};
+	
+	public static Comparator<ClauValor<String, User>> CMP_CLAU_VALOR = new Comparator<ClauValor<String, User>>() {
+
+		@Override
+		public int compare(ClauValor<String, User> cvUser1, ClauValor<String, User> cvUser2) {
+			int ret = cvUser1.compareTo(cvUser2);
 			return ret;
 		}
 	};
