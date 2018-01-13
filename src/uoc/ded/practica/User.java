@@ -2,6 +2,7 @@ package uoc.ded.practica;
 
 import java.util.Comparator;
 
+import uoc.ei.tads.ArbreAVL;
 import uoc.ei.tads.ClauValor;
 import uoc.ei.tads.Iterador;
 import uoc.ei.tads.Llista;
@@ -22,7 +23,7 @@ public class User {
 	private Llista<PausedMovie> pausedMovies;
 	
 	private Movie watchingMovie;
-	private LlistaEncadenadaOrdenada<WatchedMovie> watchedMovies;
+	private ArbreAVL<WatchedMovie> watchedMovies;
 	
 	public static Comparator<String> CMP = new Comparator<String>() {
 
@@ -48,7 +49,7 @@ public class User {
 		this.surname = surname;
 		this.watchingMovie=null;
 		this.pausedMovies = new LlistaEncadenada<PausedMovie>();
-		this.watchedMovies = new LlistaEncadenadaOrdenada<WatchedMovie>(WatchedMovie.CMP);
+		this.watchedMovies = new ArbreAVL<WatchedMovie>(WatchedMovie.CMP);
 	}
 
 	public String getIdUser() {
@@ -64,7 +65,7 @@ public class User {
 	}
 
 	public void addWatchedMovie(WatchedMovie wm) {
-		this.watchedMovies.add(wm);
+		this.watchedMovies.afegir(wm);
 	}
 
 	public PausedMovie pauseMovie(int minute) throws DEDException {
@@ -117,6 +118,12 @@ public class User {
 				sb.append(it.seguent().toString(Messages.PREFIX)).append(Messages.LS);
 			}
 		}
+		if (!this.watchedMovies.estaBuit()) {
+			sb.append(Messages.LS+"watched movies: "+Messages.LS);
+			for (Iterador<WatchedMovie> it = this.watchedMovies.elements(); it.hiHaSeguent(); ) {
+				sb.append(Messages.PREFIX).append(it.seguent().toString()).append(Messages.LS);
+			}
+		}
 		
 		return sb.toString();
 	}
@@ -132,7 +139,7 @@ public class User {
 		this.watchingMovie=null;
 	}
 
-	public LlistaEncadenadaOrdenada<WatchedMovie> getWatchedMovies() {
+	public ArbreAVL<WatchedMovie> getWatchedMovies() {
 		return this.watchedMovies;		
 	}
 
