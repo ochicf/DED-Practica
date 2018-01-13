@@ -123,6 +123,13 @@ public class ContentManagerImpl implements ContentManager {
 	}
 
 	@Override
+	public Movie getMovie(String idMovie) throws DEDException {
+		Movie movie = this.movies.consultar(idMovie);
+		if (movie == null) throw new DEDException(Messages.MOVIE_NOT_FOUND);
+		return movie;
+	}
+
+	@Override
 	public Iterador<Movie> topMovies() throws DEDException {
 		if (this.topMovies.estaBuit()) throw new DEDException(Messages.NO_MOVIES);
 		return this.topMovies.elements();
