@@ -13,6 +13,7 @@ public class Movie implements Comparable<Movie>{
 	private int duration;
 	private String director;
 	private int views;
+	private int rating;
 
 	public static final Comparator<Movie> CMP =  new Comparator<Movie>() {
 
@@ -22,11 +23,23 @@ public class Movie implements Comparable<Movie>{
 		}
 	};
 
+	/**
+	 * Descending rating comparator.
+	 */
+	public static final Comparator<Movie> CMP_RATING =  new Comparator<Movie>() {
+
+		@Override
+		public int compare(Movie m1, Movie m2) {
+			return m2.rating - m1.rating;
+		}
+	};
+
 	public Movie(String idMovie, String title, int duration, String director) {
 		this.idMovie=idMovie;
 		this.title = title;
 		this.duration=duration;
 		this.director = director;
+		this.rating = 0;
 	}
 	
 	public int views() {
@@ -56,6 +69,7 @@ public class Movie implements Comparable<Movie>{
 		sb.append(prefix).append("director: ").append(this.director).append(Messages.LS);
 		sb.append(prefix).append("duration: ").append(this.duration).append(Messages.LS);
 		sb.append(prefix).append("views: ").append(this.views()).append(Messages.LS);
+		sb.append(prefix).append("rating: ").append(this.rating).append(Messages.LS);
 		
 		return sb.toString();
 	}
@@ -66,6 +80,14 @@ public class Movie implements Comparable<Movie>{
 
 	public String getIdMovie() {
 		return this.idMovie;
+	}
+	
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+	
+	public int getRating() {
+		return this.rating;
 	}
 
 }
