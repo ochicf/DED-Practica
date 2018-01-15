@@ -1,0 +1,41 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# FORMAT per a fer el test:                                         #
+# nomMetode, valorArgument1, valorArgument2, valorArgumentN         #
+# Admet String's, tipus de dades primitius i dates (java.util.Date) #
+# en format dd-MM-yyyy HH:mm:ss                                     #
+# No suporta metodes homonims amb el mateix nombre de parametres    #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# Oscar Chic Farré PRA test 
+
+addMovie, M2, Star Wars: Episode V - The Empire Strikes Back, 124, Irvin Kershner
+addMovie, M1, Star Wars: Episode IV - A New Hope, 121, George Lucas
+
+
+# TEST 1
+# rate two films and test bestRated normal behavior
+
+rateMovie, M2, 90
+getMovie, M2
+
+rateMovie, M1, 95
+getMovie, M1
+
+# expected M1
+bestRated
+
+# TEST 2
+# update a movie's rating and test if bestRated result reflects that change 
+
+rateMovie, M1, 95
+getMovie, M1
+
+rateMovie, M1, 85
+getMovie, M1
+
+# expected M2
+bestRated
+
+#exected M1
+bestRated
+
