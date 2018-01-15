@@ -157,6 +157,17 @@ public class ContentManagerImpl implements ContentManager {
 		return this.movies.elements();
 	}
 
+	@Override
+	public void rateMovie(String idMovie, int rating) {
+		try {
+			Movie movie = this.getMovie(idMovie);
+			movie.setRating(rating);
+			this.ratedMovies.encuar(movie);
+		} catch (DEDException e) {
+			// do nothing
+		}
+		
+	}
 
 
 
