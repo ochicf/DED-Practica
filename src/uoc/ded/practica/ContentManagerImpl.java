@@ -169,6 +169,11 @@ public class ContentManagerImpl implements ContentManager {
 		
 	}
 
+	@Override
+	public Movie bestRated() throws DEDException {
+		if (this.ratedMovies.estaBuit()) throw new DEDException(Messages.NO_MOVIES);
+		return this.ratedMovies.desencuar();
+	}
 
 
     
