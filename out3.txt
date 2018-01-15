@@ -8,6 +8,9 @@
 
 # Oscar Chic Farré PRA test
 
+addUser(000000A, Joan, Lopez)
+void
+
 addMovie(M2, Star Wars: Episode V - The Empire Strikes Back, 124, Irvin Kershner)
 void
 addMovie(M1, Star Wars: Episode IV - A New Hope, 121, George Lucas)
@@ -93,4 +96,28 @@ duration: 121
 views: 0
 rating: 85
 
+
+# TEST 3
+# pause movie twice in different times to check whether the paused movie is
+# updated or added twice
+watchMovie(000000A, M1)
+void
+pauseMovie(000000A, 10)
+void
+getUser(000000A)
+id: 000000A name: Joan surname: Lopez 
+paused movies: 
+	movie: M1 - Star Wars: Episode IV - A New Hope, minute: 10
+
+
+watchMovie(000000A, M1)
+void
+pauseMovie(000000A, 20)
+void
+# expect paused movies to have M1 only once with paused time = 20
+getUser(000000A)
+id: 000000A name: Joan surname: Lopez 
+paused movies: 
+	movie: M1 - Star Wars: Episode IV - A New Hope, minute: 10
+	movie: M1 - Star Wars: Episode IV - A New Hope, minute: 20
 

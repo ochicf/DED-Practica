@@ -8,6 +8,8 @@
 
 # Oscar Chic Farré PRA test 
 
+addUser, 000000A, Joan, Lopez
+
 addMovie, M2, Star Wars: Episode V - The Empire Strikes Back, 124, Irvin Kershner
 addMovie, M1, Star Wars: Episode IV - A New Hope, 121, George Lucas
 
@@ -39,3 +41,14 @@ bestRated
 #exected M1
 bestRated
 
+# TEST 3
+# pause movie twice in different times to check whether the paused movie is
+# updated or added twice
+watchMovie, 000000A, M1
+pauseMovie, 000000A, 10
+getUser, 000000A
+
+watchMovie, 000000A, M1
+pauseMovie, 000000A, 20
+# expect paused movies to have M1 only once with paused time = 20
+getUser, 000000A
