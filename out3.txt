@@ -118,6 +118,5 @@ void
 getUser(000000A)
 id: 000000A name: Joan surname: Lopez 
 paused movies: 
-	movie: M1 - Star Wars: Episode IV - A New Hope, minute: 10
 	movie: M1 - Star Wars: Episode IV - A New Hope, minute: 20
 
