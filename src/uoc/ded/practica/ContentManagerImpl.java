@@ -15,11 +15,13 @@ public class ContentManagerImpl implements ContentManager {
 	Diccionari<String, Movie> movies;
 	
 	OrderedVector<Movie> topMovies;
+	CuaAmbPrioritatActualitzable<Movie> ratedMovies;
 	
 	public ContentManagerImpl() {
 		this.users = new DiccionariAVLImpl<String, User>(User.CMP_CLAU_VALOR);
 		this.movies = new TaulaDispersio<String, Movie>(P);
 		this.topMovies=new OrderedVector<Movie>(TOP_MOVIES, Movie.CMP);
+		this.ratedMovies = new CuaAmbPrioritatActualitzable<Movie>(Movie.CMP_RATING);
 	}
 
 	
