@@ -73,7 +73,12 @@ public class User {
 		if (minute > m.getDuration()) throw new DEDException(Messages.MOVIE_DURATION_EXCEEDED);
 		
 		PausedMovie pausedMovie = new PausedMovie(m, minute);
-		this.pausedMovies.afegirAlFinal(pausedMovie);
+		Posicio<PausedMovie> posicio = this.posicioPausedMovie(m.getIdMovie());
+		if (posicio == null) {
+			this.pausedMovies.afegirAlFinal(pausedMovie);
+		} else {
+			this.pausedMovies.reemplacar(posicio, pausedMovie);
+		}
 		this.watchingMovie = null;
 		return pausedMovie;
 	}
